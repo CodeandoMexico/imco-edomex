@@ -1,0 +1,21 @@
+<%= form_for(@crud_municipio) do |f| %>
+  <% if @crud_municipio.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@crud_municipio.errors.count, "error") %> prohibited this crud_municipio from being saved:</h2>
+
+      <ul>
+      <% @crud_municipio.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nombre %><br>
+    <%= f.text_field :nombre %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
