@@ -45,16 +45,15 @@ class CrudTramitesController < ApplicationController
     giro_json = JSON.parse(response.body)
     puts "******************************* get limit " 
       return giro_json['result']['total'] #obtenemos el tamaño de los rows
-    else
- puts "******************************* con limite"
-
+  else
+    puts "******************************* con limite"
      response = HTTParty.get("http://datamx.io/api/action/datastore_search?resource_id=21cd34ed-f6d3-4ae7-a6c6-813f7939e539&limit=#{limite_}", :headers => { "Authorization" => "68a89e02-1eac-41e0-8a08-e74b0d9c755b"})
      giro_json = JSON.parse(response.body)
     
-     giro_json.each do |item|
-      puts giro_json['result']['records']['Nom_giro'] 
-    end
-  end
+     giro_json['result']['records'].each do |item|
+      @giros[item['Nom_giro'] ] = item['Num_Consc'] 
+    end #termina do each
+  end#termina else 
 
 end
 
