@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141126222827) do
+ActiveRecord::Schema.define(version: 20141126235806) do
 
   create_table "crud_municipios", force: true do |t|
     t.string   "nombre"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "crud_tramites", force: true do |t|
+    t.string   "nombre"
+    t.string   "giro"
+    t.string   "local_determinado"
+    t.string   "remodelacion"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

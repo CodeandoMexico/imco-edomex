@@ -1,0 +1,33 @@
+<%= form_for(@crud_tramite) do |f| %>
+  <% if @crud_tramite.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@crud_tramite.errors.count, "error") %> prohibited this crud_tramite from being saved:</h2>
+
+      <ul>
+      <% @crud_tramite.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nombre %><br>
+    <%= f.text_field :nombre %>
+  </div>
+  <div class="field">
+    <%= f.label :giro %><br>
+    <%= f.text_field :giro %>
+  </div>
+  <div class="field">
+    <%= f.label :local_determinado %><br>
+    <%= f.text_field :local_determinado %>
+  </div>
+  <div class="field">
+    <%= f.label :remodelacion %><br>
+    <%= f.text_field :remodelacion %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,31 @@
+<h1>Listing crud_tramites</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Giro</th>
+      <th>Local determinado</th>
+      <th>Remodelacion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @crud_tramites.each do |crud_tramite| %>
+      <tr>
+        <td><%= crud_tramite.nombre %></td>
+        <td><%= crud_tramite.giro %></td>
+        <td><%= crud_tramite.local_determinado %></td>
+        <td><%= crud_tramite.remodelacion %></td>
+        <td><%= link_to 'Show', crud_tramite %></td>
+        <td><%= link_to 'Edit', edit_crud_tramite_path(crud_tramite) %></td>
+        <td><%= link_to 'Destroy', crud_tramite, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Crud tramite', new_crud_tramite_path %>

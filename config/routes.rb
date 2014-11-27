@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :crud_tramites
+
   get 'modulos/index'
 
   get 'municipio/index'

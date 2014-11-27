@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @crud_tramite.nombre %>
+</p>
+
+<p>
+  <strong>Giro:</strong>
+  <%= @crud_tramite.giro %>
+</p>
+
+<p>
+  <strong>Local determinado:</strong>
+  <%= @crud_tramite.local_determinado %>
+</p>
+
+<p>
+  <strong>Remodelacion:</strong>
+  <%= @crud_tramite.remodelacion %>
+</p>
+
+<%= link_to 'Edit', edit_crud_tramite_path(@crud_tramite) %> |
+<%= link_to 'Back', crud_tramites_path %>
