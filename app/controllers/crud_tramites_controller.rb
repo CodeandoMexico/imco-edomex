@@ -1,3 +1,4 @@
+require "httparty"
 class CrudTramitesController < ApplicationController
   before_action :set_crud_tramite, only: [:show, :edit, :update, :destroy]
 
@@ -15,18 +16,48 @@ class CrudTramitesController < ApplicationController
 
   # GET /crud_tramites/new
   def new
-    @giros = {"Peluqueria"=>'pl','Motel'=>'mo'} 
+    @giros = { } 
     @opciones = {"Sí"=> "si", "No"=>"no"} 
 
-   @titulo = "¿QUÉ TRÁMITES NECESITO PARA ABRIR UN NEGOCIO?"
-   @subtitulo= "COMPLETA EL FORMULARIO"
-   
-   @NOMBRE_NEGOCIO= "Nombre para tu negocio"
-   @GIRO_NEGOCIO = "Giro de tu negocio"
-   @LUGAR_DETERMINADO = "Tienes un local determinado para tu negocio?"
-   @PLANEAS_REMODELAR = "¿Planeas hacer remodelaciones en el lugar?"
+    @titulo = "¿QUÉ TRÁMITES NECESITO PARA ABRIR UN NEGOCIO?"
+    @subtitulo= "COMPLETA EL FORMULARIO"
+
+    @NOMBRE_NEGOCIO= "Nombre para tu negocio"
+    @GIRO_NEGOCIO = "Giro de tu negocio"
+    @LUGAR_DETERMINADO = "Tienes un local determinado para tu negocio?"
+    @PLANEAS_REMODELAR = "¿Planeas hacer remodelaciones en el lugar?"
+    
+    #hacemos la peticion para saber el limite de los registros
+    value = limit_giros(0)
+
+    if value > 0
+      limit_giros(value)
+    end
+
+
     @crud_tramite = CrudTramite.new
+
+ end
+
+ def limit_giros limite_
+  if limite_ == 0
+    response = HTTParty.get('http://datamx.io/api/action/datastore_search?resource_id=21cd34ed-f6d3-4ae7-a6c6-813f7939e539', :headers => { "Authorization" => "68a89e02-1eac-41e0-8a08-e74b0d9c755b"})
+    giro_json = JSON.parse(response.body)
+    puts "******************************* get limit " 
+      return giro_json['result']['total'] #obtenemos el tamaño de los rows
+    else
+ puts "******************************* con limite"
+
+     response = HTTParty.get("http://datamx.io/api/action/datastore_search?resource_id=21cd34ed-f6d3-4ae7-a6c6-813f7939e539&limit=#{limite_}", :headers => { "Authorization" => "68a89e02-1eac-41e0-8a08-e74b0d9c755b"})
+     giro_json = JSON.parse(response.body)
+    
+     giro_json.each do |item|
+      puts giro_json['result']['records']['Nom_giro'] 
+    end
   end
+
+end
+
 
   # GET /crud_tramites/1/edit
   def edit
@@ -82,4 +113,4 @@ class CrudTramitesController < ApplicationController
     def crud_tramite_params
       params.require(:crud_tramite).permit(:nombre, :giro, :local_determinado, :remodelacion)
     end
-end
+  end
