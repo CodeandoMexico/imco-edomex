@@ -4,6 +4,7 @@ class CrudTramitesController < ApplicationController
   # GET /crud_tramites
   # GET /crud_tramites.json
   def index
+
     @crud_tramites = CrudTramite.all
   end
 
@@ -14,6 +15,16 @@ class CrudTramitesController < ApplicationController
 
   # GET /crud_tramites/new
   def new
+    @giros = {"Peluqueria"=>'pl','Motel'=>'mo'} 
+    @opciones = {"Sí"=> "si", "No"=>"no"} 
+
+   @titulo = "¿QUÉ TRÁMITES NECESITO PARA ABRIR UN NEGOCIO?"
+   @subtitulo= "COMPLETA EL FORMULARIO"
+   
+   @NOMBRE_NEGOCIO= "Nombre para tu negocio"
+   @GIRO_NEGOCIO = "Giro de tu negocio"
+   @LUGAR_DETERMINADO = "Tienes un local determinado para tu negocio?"
+   @PLANEAS_REMODELAR = "¿Planeas hacer remodelaciones en el lugar?"
     @crud_tramite = CrudTramite.new
   end
 
