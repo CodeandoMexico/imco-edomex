@@ -2,15 +2,18 @@
 <!-- About Section -->
 <section class="success" id="about">
 	<div class="container">
-		<%= form_for(@municipio) do |f| %>
-		<div class="field">
-			<% lista = @nombre_municipio.sort %>
-			<%= f.select :nombre ,lista %>   
-		</div>
+		
 
-		<% end %>
+
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-2 text-center">
+				<%= form_for(@municipio) do |f| %>
+				<div class="field">
+					<% lista = @nombre_municipio.sort %>
+					<%= f.select :nombre ,lista %>   
+				</div>
+
+				<% end %>
 				<a href="http://localhost:3000/modulos/index" class="btn btn-lg btn-outline">
 					<i class="fa fa-download">Continuar</i>
 				</a>

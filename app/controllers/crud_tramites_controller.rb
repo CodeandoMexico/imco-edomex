@@ -39,6 +39,10 @@ class CrudTramitesController < ApplicationController
  end#termina new
 
 
+def new_2
+  
+end
+
 =begin
   metodo que consume api datamx para obtener giros de un negocio
   (int) 0  => regresa el limite de registros
