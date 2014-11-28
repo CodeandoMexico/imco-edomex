@@ -5,7 +5,6 @@ class CrudTramitesController < ApplicationController
   # GET /crud_tramites
   # GET /crud_tramites.json
   def index
-
     @crud_tramites = CrudTramite.all
   end
 
@@ -30,23 +29,27 @@ class CrudTramitesController < ApplicationController
     #hacemos la peticion para saber el limite de los registros
     value = limit_giros(0)
 
+    # si tememos por lo menos un valor lllenamos los giros
     if value > 0
       limit_giros(value)
     end
 
+    @crud_tramite = CrudTramite.new # instancia del crud tramites
 
-    @crud_tramite = CrudTramite.new
+ end#termina new
 
- end
 
+=begin
+  metodo que consume api datamx para obtener giros de un negocio
+  (int) 0  => regresa el limite de registros
+  (int) n => regresa el numero de registros limit n
+=end
  def limit_giros limite_
-  if limite_ == 0
+  if limite_ == 0 #no sabemos el limite de registros
     response = HTTParty.get('http://datamx.io/api/action/datastore_search?resource_id=21cd34ed-f6d3-4ae7-a6c6-813f7939e539', :headers => { "Authorization" => "68a89e02-1eac-41e0-8a08-e74b0d9c755b"})
     giro_json = JSON.parse(response.body)
-    puts "******************************* get limit " 
       return giro_json['result']['total'] #obtenemos el tamaño de los rows
-  else
-    puts "******************************* con limite"
+  else #sabemos el limite de registros
      response = HTTParty.get("http://datamx.io/api/action/datastore_search?resource_id=21cd34ed-f6d3-4ae7-a6c6-813f7939e539&limit=#{limite_}", :headers => { "Authorization" => "68a89e02-1eac-41e0-8a08-e74b0d9c755b"})
      giro_json = JSON.parse(response.body)
     
@@ -55,7 +58,7 @@ class CrudTramitesController < ApplicationController
     end #termina do each
   end#termina else 
 
-end
+end#termina limit_giros
 
 
   # GET /crud_tramites/1/edit

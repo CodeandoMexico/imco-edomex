@@ -5,7 +5,7 @@ class MunicipioController < ApplicationController
    @municipio = CrudMunicipio.new
    @municipios = CrudMunicipio.all
   
-   @titulo = "Ubicacón de tu negocio"
+   @titulo = "Ubicación de tu negocio"
    @subtitulo= "Selecciona un municipio"
 
 
